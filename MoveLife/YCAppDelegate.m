@@ -45,9 +45,8 @@
     [self.motionManager startAccelerometerUpdatesToQueue:_operationQueue
                                              withHandler:^(CMAccelerometerData *latestAcc, NSError *error) {
         dispatch_sync(dispatch_get_main_queue(), ^(void) {
-
             // 所有操作进行同步
-            @synchronized(_motionManager) {
+            @synchronized(self.motionManager) {
                 BOOL _isShake = [self isShake:_motionManager.accelerometerData];
                 if (_isShake) {
                     NSLog(@"摇晃次数 %04u",++self.shakeNum);
@@ -87,16 +86,13 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     [YCLocationManager sharedInstance].executingInBackgroud = YES;
-    
-    
-//    [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(aa) userInfo:nil repeats:YES];
-//    [[YCLocationManager sharedInstance].locationManager setDesiredAccuracy:kCLLocationAccuracyHundredMeters];
+    [[YCLocationManager sharedInstance].locationManager setDesiredAccuracy:kCLLocationAccuracyHundredMeters];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     [YCLocationManager sharedInstance].executingInBackgroud = NO;
-    //    [[YCLocationManager sharedInstance].locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+    [YCLocationManager sharedInstance].locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
     
 }
 
