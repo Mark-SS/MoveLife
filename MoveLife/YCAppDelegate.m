@@ -20,13 +20,11 @@
 {
     [[[YCLocationManager sharedInstance] locationManager]startUpdatingLocation];
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"MainStoryboard"
+                                                         bundle:nil];
     self.window.rootViewController = [storyboard instantiateInitialViewController];
     [self.window makeKeyAndVisible];
     [self initShake];
-    
-
-    
     return YES;
 }
 
@@ -41,7 +39,7 @@
 }
 
 - (void)initShake {
-    
+
     [self.motionManager startAccelerometerUpdatesToQueue:_operationQueue
                                              withHandler:^(CMAccelerometerData *latestAcc, NSError *error) {
         dispatch_sync(dispatch_get_main_queue(), ^(void) {
@@ -66,13 +64,10 @@
 - (BOOL)isShake:(CMAccelerometerData *)newestAccel {
     
     BOOL isShake = NO;
-        // 三个方向任何一个方向的加速度大于1.5就认为是处于摇晃状态，当都小于1.5时认为摇奖结束。
+          // 三个方向任何一个方向的加速度大于1.5就认为是处于摇晃状态，当都小于1.5时认为摇奖结束。
     if (ABS(newestAccel.acceleration.x) > 1.5 || ABS(newestAccel.acceleration.y) > 1.5 || ABS(newestAccel.acceleration.z) > 1.5) {
-        
         isShake = YES;
-        
     }
-    
     return isShake;
     
 }
@@ -92,11 +87,9 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     [YCLocationManager sharedInstance].executingInBackgroud = NO;
-    [YCLocationManager sharedInstance].locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
+    [[YCLocationManager sharedInstance].locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
     
 }
-
-
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application
 {
@@ -107,7 +100,6 @@
 {
     return YES;
 }
-
 
 - (void)aa
 {
