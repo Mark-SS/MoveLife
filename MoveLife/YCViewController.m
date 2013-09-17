@@ -10,6 +10,7 @@
 #import "YCLocationManager.h"
 #import "YCAppDelegate.h"
 
+
 @interface YCViewController ()
 
 //@property (nonatomic, assign) NSInteger stepNum;//记录步数
